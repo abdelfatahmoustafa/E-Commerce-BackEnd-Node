@@ -1,9 +1,11 @@
 import express from "express";
-import { addCategory } from "./category.controller.js";
+import * as all from "./category.controller.js";
 import upload from "../../services/multer.js";
 
 const routerCategory = express.Router();
 
-routerCategory.post("/addCategory", upload.single("image"), addCategory);
+const uploadCategoryImage = upload("categories");
+routerCategory.get("/", all.getCategories);
+routerCategory.post("/", uploadCategoryImage.single("image"), all.addCategory);
 
 export default routerCategory;

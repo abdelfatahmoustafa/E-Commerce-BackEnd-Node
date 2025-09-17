@@ -4,8 +4,6 @@ import CategoryModel from "../../../db/models/category-model/category-model.js";
 
 export const addCategory = async (req, res, next) => {
   const { name, description } = req.body;
-  console.log("BODY:", req.body);
-  console.log("FILE:", req.file);
 
   const slug = slugify(name, { lower: true, replacement: "_" });
   const customID = nanoid();
@@ -24,8 +22,8 @@ export const addCategory = async (req, res, next) => {
       slug,
       description,
       image: {
-        secure_url: req.file.path,     // Cloudinary URL
-        public_id: req.file.filename,  // Cloudinary public_id
+        secure_url: req.file.path,
+        public_id: req.file.filename,
       },
       customID,
       createdBy: req.user?._id,
@@ -40,5 +38,20 @@ export const addCategory = async (req, res, next) => {
   } catch (error) {
     console.error(error);
     next(new Error(`Error creating category: ${error.message}`));
+  }
+};
+
+export const getCategories = async (req, res, next) => {
+  try {
+    const categories = await CategoryModel.find().populate("subCategories");
+    if (!categories || categories.length === 0) {
+      return next(new Error("No categories found, please add some categories"));
+    }
+    return res.json({
+      message: "All Categories",
+      result: categories,
+    });
+  } catch (err) {
+    return next(err);
   }
 };

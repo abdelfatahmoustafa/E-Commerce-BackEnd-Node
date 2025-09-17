@@ -1,3 +1,9 @@
-export default handelError = (req, res, next) => {
-  res.status(500).json({ massage: err.massage });
+// middlewares/errorHandler.js
+const handleError = (err, req, res, next) => {
+  res.status(err.status || 500).json({
+    success: false,
+    message: err.message || "Something went wrong",
+  });
 };
+
+export default handleError;
