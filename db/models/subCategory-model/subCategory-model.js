@@ -6,12 +6,13 @@ const subCategorySchema = new Schema(
     slug: { type: String, required: false, unique: true, lowercase: true },
     description: { type: String, required: true },
     category: { type: Schema.Types.ObjectId, ref: "Category", required: true },
-    imageUrl: {
+    image: {
       secure_url: { type: String, required: false },
       public_id: { type: String, required: false },
     },
     createdBy: { type: Schema.Types.ObjectId, ref: "User", required: true },
   },
+
   { timestamps: true }
 );
 const SubCategoryModel = mongoose.model("SubCategory", subCategorySchema);
