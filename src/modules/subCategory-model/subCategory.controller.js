@@ -2,7 +2,6 @@ import slugify from "slugify";
 import SubCategoryModel from "../../../db/models/subCategory-model/subCategory-model.js";
 
 export const addSubCategory = async (req, res, next) => {
-  //   const { category } = req.params;
   const { name, category } = req.body;
   const slug = slugify(name, { lower: true, replacement: "_" });
   try {
@@ -13,8 +12,7 @@ export const addSubCategory = async (req, res, next) => {
       return next(new Error("Image is required"));
     }
     const subCategoryObject = {
-      name,
-      slug,
+      ...req.body,
       category,
       image: {
         secure_url: req.file.path,
@@ -35,7 +33,12 @@ export const addSubCategory = async (req, res, next) => {
 
 export const getSubCategories = async (req, res, next) => {
   try {
-    const subCategories = await SubCategoryModel.find().populate("category");
+    const subCategories = await SubCategoryModel.find()
+      .populate({
+        path: "brands",
+        populate: { path: "subCategoryID", select: "name" },
+      })
+      .populate("categoryID", "name");
 
     if (!subCategories || subCategories.length === 0) {
       return next(

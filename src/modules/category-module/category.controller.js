@@ -43,13 +43,16 @@ export const addCategory = async (req, res, next) => {
 
 export const getCategories = async (req, res, next) => {
   try {
-    const categories = await CategoryModel.find().populate("subCategories");
+    const categories = await CategoryModel.find().populate({
+      path: "subCategories",
+      populate: { path: "brands" },
+    });
     if (!categories || categories.length === 0) {
       return next(new Error("No categories found, please add some categories"));
     }
     return res.json({
       message: "All Categories",
-      result: categories,
+      Categories: categories,
     });
   } catch (err) {
     return next(err);

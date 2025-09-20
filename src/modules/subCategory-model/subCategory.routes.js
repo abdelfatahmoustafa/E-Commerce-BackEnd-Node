@@ -5,9 +5,9 @@ const subCategoryRouter = express.Router();
 
 const uploadSubCategoryImage = Upload("categories/subCategories");
 subCategoryRouter.post(
-  "/addSubCategory",
-  uploadSubCategoryImage.single("image"),
+  "/",
+  uploadSubCategoryImage.single("img"),
   all.addSubCategory
 );
-subCategoryRouter.get("/getSubCategories", all.getSubCategories);
+subCategoryRouter.get("/", all.getSubCategories);
 export default subCategoryRouter;

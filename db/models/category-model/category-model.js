@@ -22,7 +22,7 @@ const categorySchema = new Schema(
 categorySchema.virtual("subCategories", {
   ref: "SubCategory",
   localField: "_id",
-  foreignField: "category",
+  foreignField: "categoryID",
 });
 const CategoryModel = mongoose.model("Category", categorySchema);
 export default CategoryModel;
