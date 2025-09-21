@@ -2,7 +2,7 @@ import slugify from "slugify";
 import SubCategoryModel from "../../../db/models/subCategory-model/subCategory-model.js";
 
 export const addSubCategory = async (req, res, next) => {
-  const { name, category } = req.body;
+  const { name, categoryID } = req.body;
   const slug = slugify(name, { lower: true, replacement: "_" });
   try {
     if (await SubCategoryModel.findOne({ name })) {
@@ -13,7 +13,8 @@ export const addSubCategory = async (req, res, next) => {
     }
     const subCategoryObject = {
       ...req.body,
-      category,
+      categoryID,
+      slug,
       image: {
         secure_url: req.file.path,
         public_id: req.file.filename,

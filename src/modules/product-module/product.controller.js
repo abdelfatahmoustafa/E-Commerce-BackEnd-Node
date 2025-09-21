@@ -1,6 +1,6 @@
 import slugify from "slugify";
 import ProductModel from "../../../db/models/product-model/product-model.js";
-import e from "express";
+import pagination from "../../utils/pagination.js";
 
 export const addProduct = async (req, res, next) => {
   try {
@@ -48,10 +48,13 @@ export const getAllProducts = async (req, res, next) => {
       .json({ message: "Error In Get All Products ", error: error.message });
   }
 };
-export const getSingleProduct = async (req, res, next) => {
+
+export const getLimitProduct = async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const product = await ProductModel.findById(id)
+    const { limit, skip } = pagination({ ...req.query });
+    const product = await ProductModel.find()
+      .limit(limit)
+      .skip(skip)
       .populate("category")
       .populate("subCategory")
       .populate("brand")
@@ -59,10 +62,32 @@ export const getSingleProduct = async (req, res, next) => {
     if (!product) {
       return next(new Error("Product Not Found"));
     }
-    res.json({ message: "Single Product", product });
+    res.json({ message: "Limit Product", product });
   } catch (error) {
     res
       .status(500)
-      .json({ message: "Error In Get Single Product ", error: error.message });
+      .json({ message: "Error In Get Limit Product ", error: error.message });
   }
 };
+export const searchProduct = async (req, res, next) => {
+  const { q } = req.query;
+  try {
+    const product = await ProductModel.findOne({
+      $or: [{ name: { $regex: q, $options: "i" } }],
+    })
+
+      .populate("category")
+      .populate("subCategory")
+      .populate("brand")
+      .populate("createdBy", "userName email");
+    if (!product) {
+      return next(new Error("Product Not Found"));
+    }
+    res.json({ message: "Search Product", product });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Error In Get Limit Product ", error: error.message });
+  }
+};
+

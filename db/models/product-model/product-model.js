@@ -5,8 +5,8 @@ const productSchema = new Schema(
     name: { type: String, required: true, lowercase: true },
     slug: { type: String, required: true, lowercase: true },
     description: { type: String, required: false, default: "" },
-    price: { type: Number, required: false, default: 0 },
-    quantity: { type: Number, required: false, default: 0 },
+    price: { type: Number, required: false, default: 1000 },
+    quantity: { type: Number, required: false, default: 5 },
     sold: { type: Number, default: 0 },
     image: [
       {

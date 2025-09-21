@@ -6,7 +6,8 @@ const productRouter = Router();
 const uploadProductImage = Upload("products");
 productRouter.post("/",uploadProductImage.single("img"), all.addProduct);
 productRouter.get("/", all.getAllProducts);
-productRouter.get("/:id", all.getSingleProduct);
+productRouter.get("/pagination", all.getLimitProduct);
+productRouter.get("/searchProduct", all.searchProduct);
 
 
 export default productRouter;
