@@ -1,6 +1,7 @@
 import addressRouter from "../modules/address-module/address.routes.js";
 import brandRouter from "../modules/brand-module/brand.routes.js";
 import categoryRouter from "../modules/category-module/category.routes.js";
+import orderRouter from "../modules/order-module/order.routes.js";
 import productRouter from "../modules/product-module/product.routes.js";
 import reviewRouter from "../modules/review-module/review.routes.js";
 import subCategoryRouter from "../modules/subCategory-model/subCategory.routes.js";
@@ -15,5 +16,6 @@ Routes.use("/product", productRouter);
 Routes.use("/", userRouter);
 Routes.use("/address", addressRouter);
 Routes.use("/review", reviewRouter);
+Routes.use("/order", orderRouter);
 
 export default Routes;
