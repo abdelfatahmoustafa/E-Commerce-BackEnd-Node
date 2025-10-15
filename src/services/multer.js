@@ -8,6 +8,8 @@ function Upload(folderPath) {
     params: {
       folder: "e-commerce/" + folderPath,
       allowed_formats: ["jpg", "jpeg", "png"],
+      background_removal: "cloudinary_ai",
+      transformation: [{ width: 500, height: 500, crop: "limit" }],
     },
   });
 
@@ -15,4 +17,3 @@ function Upload(folderPath) {
 }
 
 export default Upload;
-

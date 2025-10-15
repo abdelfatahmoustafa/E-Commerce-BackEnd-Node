@@ -73,7 +73,10 @@ export const searchProduct = async (req, res, next) => {
   const { q } = req.query;
   try {
     const product = await ProductModel.findOne({
-      $or: [{ name: { $regex: q, $options: "i" } }],
+      $or: [
+        { name: { $regex: q, $options: "i" } },
+        { description: { $regex: q, $options: "i" } },
+      ],
     })
 
       .populate("category")
@@ -90,4 +93,3 @@ export const searchProduct = async (req, res, next) => {
       .json({ message: "Error In Get Limit Product ", error: error.message });
   }
 };
-

@@ -14,6 +14,12 @@ const userSchema = new Schema(
       enum: ["customer", "seller", "admin"],
       default: "customer",
     },
+     usedCoupons: [
+    {
+      couponCode: { type: String, required: true },
+      usageCount: { type: Number, default: 0 }
+    }
+  ],
     isActive: { type: Boolean, required: false, default: false },
     image: [{
       secure_url: { type: String, required: false },
