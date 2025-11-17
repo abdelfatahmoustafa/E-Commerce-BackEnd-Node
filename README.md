@@ -1,29 +1,4 @@
-# E-Commerce BackEnd — Node.js + Express + MongoDB 🛒
 
-[![Node.js](https://img.shields.io/badge/node-%3E%3D16-green)](https://nodejs.org/)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Swagger](https://img.shields.io/badge/API-Swagger-brightgreen)](http://localhost:3000/api-docs)
-
-A modular, RESTful backend for an e-commerce application built with Node.js, Express, and MongoDB. Features include user management, categories/subcategories, brands, full product CRUD (with Cloudinary image uploads), orders, coupons, addresses, and reviews. API documentation is available via Swagger.
-
----
-
-## Table of Contents
-
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Getting Started](#getting-started)
-- [Environment Variables](#environment-variables)
-- [Scripts](#scripts)
-- [Folder Structure](#folder-structure)
-- [API Documentation](#api-documentation)
-- [Examples](#examples)
-- [Roadmap & Suggested Improvements](#roadmap--suggested-improvements)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
-
----
 
 # E-Commerce BackEnd — Node.js + Express + MongoDB 🛒
 
